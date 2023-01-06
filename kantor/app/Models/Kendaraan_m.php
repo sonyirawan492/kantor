@@ -5,19 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pegawai_m extends Model
+class Kendaraan_m extends Model
 {
     use HasFactory;
-
-    protected $table = 'mst_Pegawai';
-    protected $primaryKey = 'ID_Pegawai';
+    protected $table = 'mst_kendaraan';
+    protected $primaryKey = 'No';
     public $timestamps = false;
+    use HasFactory;
 
     function get_records($criteria='')
     {
         $result = self::select('*')
                 ->when($criteria, function ($query, $criteria) {
-                    return $query->where('ID_Pegawai',$criteria);
+                    return $query->where('No',$criteria);
             })
             ->get();
         return $result;
@@ -31,28 +31,28 @@ class Pegawai_m extends Model
 
     function update_by_id($data, $id)
     {
-        $result = self::where('ID_Pegawai', $id)
+        $result = self::where('No', $id)
             ->update($data);
         return $result;
     }
 
     function delete_by_id($id)
     {
-        $result = self::where('ID_Pegawai', $id)
+        $result = self::where('No', $id)
             ->delete();
         return $result;
     }
 
 
  // tambahan fungsi untuk transaksi pinjam (dropdown)
- function opt_Pegawai()
+ function opt_Kendaraan()
  {
-     $result = self::select('ID_Pegawai','Nama','Alamat')
+     $result = self::select('No','Nama','Jenis')
              ->get();
      foreach ($result as $row)
      {
-         $rowPegawai[$row->ID_Pegawai]=$row->Nama." - ".$row->Alamat;
+         $rowKendaraan[$row->No]=$row->Nama." - ".$row->Jenis;
      }
-     return $rowPegawai;
+     return $rowKendaraan;
  }
 }

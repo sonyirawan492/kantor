@@ -30,5 +30,6 @@
     </tr>
 @endforeach
 </table>
+<br/><a href="{{ url('kantor') }}">Kembali</a>
 </body>
 </html>
